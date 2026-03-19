@@ -1,18 +1,25 @@
-@use './global.scss';
+@use './global';
+@use './mixins';
 
 .app {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 
   &__main {
-    max-width: 800px;
+    flex: 1;
+    max-width: var(--container-max);
+    width: 100%;
     margin: 0 auto;
-    padding: 2rem 1rem;
+    padding: var(--space-xl) var(--container-padding);
   }
 
   &__footer {
     text-align: center;
-    padding: 2rem;
-    color: #9ca3af;
-    font-size: 0.875rem;
+    padding: var(--space-lg);
+    color: var(--color-text-muted);
+    font-size: var(--text-xs);
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-surface);
   }
 }

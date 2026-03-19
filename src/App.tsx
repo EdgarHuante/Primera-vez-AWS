@@ -9,6 +9,8 @@ import { useTodos, useCreateTodo, useUpdateTodoStatus, useDeleteTodo } from '@ho
 import { useToast } from '@hooks/useToast';
 import { useErrorHandler } from '@hooks/useErrorHandler';
 import type { TaskStatus } from '@domain/task';
+import type { FilterStatus } from '@store/ui.store';
+import { Sparkles } from 'lucide-react';
 import '@styles/App.scss';
 
 const queryClient = new QueryClient({
@@ -31,6 +33,13 @@ function AppContent() {
   const updateTodoStatus = useUpdateTodoStatus();
   const deleteTodo = useDeleteTodo();
 
+  const counts: Record<FilterStatus, number> = {
+    all: todos.length,
+    pendiente: todos.filter((t) => t.status === 'pendiente').length,
+    haciendo: todos.filter((t) => t.status === 'haciendo').length,
+    hecho: todos.filter((t) => t.status === 'hecho').length,
+  };
+
   const filteredTodos = filter === 'all'
     ? todos
     : todos.filter((todo) => todo.status === filter);
@@ -52,7 +61,7 @@ function AppContent() {
     updateTodoStatus.mutate(
       { id, status },
       {
-        onSuccess: () => toast.success('Estado actualizado'),
+        onSuccess: () => toast.success('Estado actualizado correctamente'),
         onError: (error) => handleError(error, { operation: 'actualizar estado' }),
       }
     );
@@ -73,6 +82,7 @@ function AppContent() {
         userName={user?.signInDetails?.loginId}
         onSignOut={signOut}
         onAddTodo={openModal}
+        counts={counts}
       />
       <main className="app__main">
         <TodoList
@@ -83,7 +93,14 @@ function AppContent() {
         />
       </main>
       <footer className="app__footer">
-        Gestor de Tareas - Powered by AWS Amplify
+        <div className="app__footer-content">
+          <span className="app__footer-brand">
+            <Sparkles size={14} />
+            TaskFlow v1.0.0
+          </span>
+          <span className="app__footer-divider">•</span>
+          <span>{new Date().getFullYear()} - Powered by AWS Amplify</span>
+        </div>
       </footer>
       <Modal isOpen={isModalOpen} onClose={closeModal}>
         <TodoForm

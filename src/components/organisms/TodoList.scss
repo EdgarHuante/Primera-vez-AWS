@@ -1,45 +1,101 @@
+@use '../../styles/mixins' as *;
+
 .todo-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--space-md);
   list-style: none;
   padding: 0;
   margin: 0;
 
-  &__loading,
   &__empty {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    padding: 3rem;
-    background-color: #f9fafb;
-    border-radius: 12px;
-    color: #6b7280;
-  }
-
-  &__spinner {
-    width: 2rem;
-    height: 2rem;
-    border: 3px solid #e5e7eb;
-    border-top-color: #3b82f6;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
+    padding: var(--space-2xl);
+    text-align: center;
+    background-color: var(--color-surface);
+    border-radius: var(--radius-xl);
+    animation: fadeIn 0.4s ease;
   }
 
   &__empty-icon {
-    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    margin-bottom: var(--space-lg);
+    background-color: var(--color-bg-secondary);
+    border-radius: 50%;
+    color: var(--color-text-muted);
+    animation: bounce 2s ease-in-out infinite;
   }
 
-  &__empty p {
+  &__empty-title {
+    margin: 0 0 var(--space-sm);
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+    color: var(--color-text-primary);
+  }
+
+  &__empty-text {
     margin: 0;
-    font-size: 1rem;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    max-width: 300px;
   }
 }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
+.todo-skeleton {
+  @include card;
+  padding: var(--space-lg);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
+  }
+
+  &__badge {
+    width: 80px;
+    height: 24px;
+    border-radius: var(--radius-full);
+    @include shimmer;
+  }
+
+  &__date {
+    width: 60px;
+    height: 16px;
+    border-radius: var(--radius-sm);
+    @include shimmer;
+  }
+
+  &__content {
+    margin-bottom: var(--space-lg);
+  }
+
+  &__line {
+    height: 16px;
+    border-radius: var(--radius-sm);
+    @include shimmer;
+    margin-bottom: var(--space-sm);
+
+    &--short {
+      width: 70%;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  &__button {
+    width: 100px;
+    height: 32px;
+    border-radius: var(--radius-md);
+    @include shimmer;
   }
 }

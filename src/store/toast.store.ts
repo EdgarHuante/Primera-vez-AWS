@@ -7,18 +7,22 @@ export interface Toast {
   type: ToastType;
   message: string;
   duration?: number;
+  action?: {
+    label: string;
+    onClick: () => void;
+  };
 }
 
 interface ToastState {
   toasts: Toast[];
-  addToast: (toast: Omit<Toast, 'id'>) => void;
+  addToast: (toast: Omit<Toast, 'id'>) => string;
   removeToast: (id: string) => void;
   clearAll: () => void;
 }
 
 let toastId = 0;
 
-export const useToastStore = create<ToastState>((set) => ({
+export const useToastStore = create<ToastState>((set, get) => ({
   toasts: [],
   addToast: (toast) => {
     const id = `toast-${++toastId}`;
@@ -28,9 +32,11 @@ export const useToastStore = create<ToastState>((set) => ({
     const duration = toast.duration ?? 4000;
     if (duration > 0) {
       setTimeout(() => {
-        set((state) => ({ toasts: state.toasts.filter((t) => t.id !== id) }));
+        get().removeToast(id);
       }, duration);
     }
+
+    return id;
   },
   removeToast: (id) =>
     set((state) => ({ toasts: state.toasts.filter((t) => t.id !== id) })),

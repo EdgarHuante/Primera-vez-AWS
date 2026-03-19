@@ -1,46 +1,46 @@
-.todo-item {
-  background-color: white;
-  border-radius: 12px;
-  padding: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+@use '../../styles/mixins' as *;
 
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
+.todo-item {
+  @include card;
+  padding: var(--space-lg);
+  animation: fadeInUp 0.4s ease backwards;
+  border-left: 4px solid transparent;
 
   &--pendiente {
-    border-left: 4px solid #f59e0b;
+    border-left-color: var(--color-warning);
   }
 
   &--haciendo {
-    border-left: 4px solid #3b82f6;
+    border-left-color: var(--color-info);
   }
 
   &--hecho {
-    border-left: 4px solid #22c55e;
-    opacity: 0.8;
+    border-left-color: var(--color-success);
+    opacity: 0.85;
 
     .todo-item__content {
       text-decoration: line-through;
-      color: #9ca3af;
+      color: var(--color-text-muted);
     }
   }
 
   &__header {
-    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-md);
   }
 
   &__content {
-    margin: 0 0 1rem 0;
-    font-size: 0.9375rem;
-    color: #1f2937;
-    line-height: 1.5;
+    margin: 0 0 var(--space-lg);
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+    line-height: var(--leading-relaxed);
   }
 
   &__actions {
     display: flex;
-    gap: 0.5rem;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
   }
 }
