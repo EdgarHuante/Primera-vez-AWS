@@ -1,7 +1,7 @@
 import { create } from 'zustand';
-import type { TodoStatus } from '../types/todo';
+import type { TaskStatus } from '@domain/task';
 
-export type FilterStatus = TodoStatus | 'all';
+export type FilterStatus = TaskStatus | 'all';
 
 interface UIState {
   filter: FilterStatus;

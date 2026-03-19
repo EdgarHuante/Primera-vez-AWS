@@ -1,13 +1,12 @@
-import React from 'react';
-import type { TodoStatus } from '../../types/todo';
-import { STATUS_LABELS } from '../../types/todo';
+import type { TaskStatus } from '@domain/task';
+import { STATUS_LABELS } from '@domain/task';
 import './Badge.scss';
 
 interface BadgeProps {
-  status: TodoStatus;
+  status: TaskStatus;
 }
 
-export const Badge: React.FC<BadgeProps> = ({ status }) => {
+export const Badge = ({ status }: BadgeProps) => {
   return (
     <span className={`badge badge--${status}`}>
       {STATUS_LABELS[status]}

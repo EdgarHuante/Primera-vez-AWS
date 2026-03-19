@@ -1,22 +1,21 @@
-import React from 'react';
-import type { Schema } from '../../../amplify/data/resource';
-import { TodoItem } from '../molecules/TodoItem';
-import type { TodoStatus } from '../../types/todo';
+import type { TaskResponse } from '@services/todo.service';
+import { TodoItem } from '@components/molecules/TodoItem';
+import type { TaskStatus } from '@domain/task';
 import './TodoList.scss';
 
 interface TodoListProps {
-  todos: Schema['Todo']['type'][];
-  onStatusChange: (id: string, status: TodoStatus) => void;
+  todos: TaskResponse[];
+  onStatusChange: (id: string, status: TaskStatus) => void;
   onDelete: (id: string) => void;
   isLoading?: boolean;
 }
 
-export const TodoList: React.FC<TodoListProps> = ({
+export const TodoList = ({
   todos,
   onStatusChange,
   onDelete,
   isLoading,
-}) => {
+}: TodoListProps) => {
   if (isLoading) {
     return (
       <div className="todo-list__loading">

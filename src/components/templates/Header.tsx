@@ -1,6 +1,5 @@
-import React from 'react';
-import { useUIStore, FilterStatus } from '../../store/ui.store';
-import { Button } from '../atoms/Button';
+import { useUIStore, type FilterStatus } from '@store/ui.store';
+import { Button } from '@components/atoms/Button';
 import './Header.scss';
 
 interface HeaderProps {
@@ -16,7 +15,7 @@ const FILTER_OPTIONS: { value: FilterStatus; label: string }[] = [
   { value: 'hecho', label: 'Hechas' },
 ];
 
-export const Header: React.FC<HeaderProps> = ({ userName, onSignOut, onAddTodo }) => {
+export const Header = ({ userName, onSignOut, onAddTodo }: HeaderProps) => {
   const { filter, setFilter } = useUIStore();
 
   return (

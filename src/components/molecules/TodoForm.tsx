@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { Button } from '../atoms/Button';
-import { Input } from '../atoms/Input';
+import { useState, type FormEvent } from 'react';
+import { Button } from '@components/atoms/Button';
+import { Input } from '@components/atoms/Input';
 import './TodoForm.scss';
 
 interface TodoFormProps {
@@ -9,24 +9,14 @@ interface TodoFormProps {
   isLoading?: boolean;
 }
 
-export const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, onCancel, isLoading }) => {
+export const TodoForm = ({ onSubmit, onCancel, isLoading }: TodoFormProps) => {
   const [content, setContent] = useState('');
-  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    const trimmed = content.trim();
-    if (!trimmed) {
-      setError('El contenido no puede estar vacío');
-      return;
-    }
-    if (trimmed.length > 500) {
-      setError('El contenido no puede exceder 500 caracteres');
-      return;
-    }
-    onSubmit(trimmed);
+    if (!content.trim()) return;
+    onSubmit(content.trim());
     setContent('');
-    setError('');
   };
 
   return (
@@ -35,12 +25,8 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, onCancel, isLoadin
       <Input
         label="Contenido"
         value={content}
-        onChange={(e) => {
-          setContent(e.target.value);
-          if (error) setError('');
-        }}
+        onChange={(e) => setContent(e.target.value)}
         placeholder="Describe la tarea..."
-        error={error}
         autoFocus
       />
       <div className="todo-form__actions">

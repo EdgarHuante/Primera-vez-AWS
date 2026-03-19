@@ -1,13 +1,14 @@
-import React from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 import './Button.scss';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'success' | 'danger' | 'ghost';
   size?: 'small' | 'medium' | 'large';
   isLoading?: boolean;
+  children?: ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({
+export const Button = ({
   variant = 'primary',
   size = 'medium',
   isLoading = false,
@@ -15,7 +16,7 @@ export const Button: React.FC<ButtonProps> = ({
   className = '',
   disabled,
   ...props
-}) => {
+}: ButtonProps) => {
   const classNames = [
     'button',
     `button--${variant}`,

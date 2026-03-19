@@ -1,19 +1,18 @@
-import React from 'react';
-import type { Schema } from '../../../amplify/data/resource';
-import { Badge } from '../atoms/Badge';
-import { Button } from '../atoms/Button';
-import { STATUS_TRANSITIONS, STATUS_LABELS } from '../../types/todo';
-import type { TodoStatus } from '../../types/todo';
+import type { TaskResponse } from '@services/todo.service';
+import { Badge } from '@components/atoms/Badge';
+import { Button } from '@components/atoms/Button';
+import { STATUS_TRANSITIONS, STATUS_LABELS } from '@domain/task';
+import type { TaskStatus } from '@domain/task';
 import './TodoItem.scss';
 
-type TodoItemProps = {
-  todo: Schema['Todo']['type'];
-  onStatusChange: (id: string, status: TodoStatus) => void;
+interface TodoItemProps {
+  todo: TaskResponse;
+  onStatusChange: (id: string, status: TaskStatus) => void;
   onDelete: (id: string) => void;
-};
+}
 
-export const TodoItem: React.FC<TodoItemProps> = ({ todo, onStatusChange, onDelete }) => {
-  const currentStatus = todo.status as TodoStatus;
+export const TodoItem = ({ todo, onStatusChange, onDelete }: TodoItemProps) => {
+  const currentStatus = todo.status as TaskStatus;
   const nextStatus = STATUS_TRANSITIONS[currentStatus];
 
   return (

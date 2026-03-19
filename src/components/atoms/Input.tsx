@@ -1,12 +1,12 @@
-import React, { useId } from 'react';
+import { useId, type InputHTMLAttributes } from 'react';
 import './Input.scss';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
 }
 
-export const Input: React.FC<InputProps> = ({ label, error, className = '', id, ...props }) => {
+export const Input = ({ label, error, className = '', id, ...props }: InputProps) => {
   const generatedId = useId();
   const inputId = id || generatedId;
 
