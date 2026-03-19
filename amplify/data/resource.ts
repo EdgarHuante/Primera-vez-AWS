@@ -10,6 +10,7 @@ const schema = a.schema({
   Todo: a
     .model({
       content: a.string(),
+      status: a.enum(['pendiente', 'haciendo', 'hecho']),
         }).authorization(allow => [allow.owner()]),
 });
 
