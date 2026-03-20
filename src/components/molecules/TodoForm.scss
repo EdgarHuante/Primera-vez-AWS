@@ -1,32 +1,40 @@
 @use '../../styles/mixins' as *;
 
 .todo-form {
-  @include card;
+  padding: var(--space-xl);
 
   &__header {
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-lg);
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
   }
 
   &__icon {
     color: var(--color-primary);
+    padding: var(--space-md);
+    background: var(--color-primary-light);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-glow);
   }
 
   &__title {
     margin: 0;
-    font-size: var(--text-lg);
-    font-weight: var(--font-semibold);
-    color: var(--color-text-primary);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    background: var(--color-primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   &__actions {
     display: flex;
     justify-content: flex-end;
-    gap: var(--space-sm);
-    margin-top: var(--space-lg);
-    padding-top: var(--space-md);
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+    padding-top: var(--space-xl);
     border-top: 1px solid var(--color-border);
+    animation: fadeIn 0.4s ease;
   }
 }

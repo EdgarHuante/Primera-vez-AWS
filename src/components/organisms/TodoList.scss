@@ -3,99 +3,130 @@
 .todo-list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-md);
+  gap: var(--space-lg);
   list-style: none;
   padding: 0;
   margin: 0;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      ellipse at top,
+      var(--color-primary-glow) 0%,
+      transparent 70%
+    );
+    opacity: 0.1;
+    pointer-events: none;
+  }
 
   &__empty {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: var(--space-2xl);
+    padding: var(--space-3xl);
     text-align: center;
-    background-color: var(--color-surface);
-    border-radius: var(--radius-xl);
-    animation: fadeIn 0.4s ease;
+    background: var(--glass-bg);
+    backdrop-filter: var(--backdrop-blur);
+    -webkit-backdrop-filter: var(--backdrop-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--glass-shadow);
+    animation: fadeIn 0.5s ease;
   }
 
   &__empty-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 120px;
-    height: 120px;
-    margin-bottom: var(--space-lg);
-    background-color: var(--color-bg-secondary);
+    width: 140px;
+    height: 140px;
+    margin-bottom: var(--space-xl);
+    background: var(--color-primary-gradient);
     border-radius: 50%;
-    color: var(--color-text-muted);
-    animation: bounce 2s ease-in-out infinite;
+    color: var(--color-white);
+    box-shadow: var(--shadow-glow);
+    animation: float 3s ease-in-out infinite;
+
+    svg {
+      animation: pulse 2s ease-in-out infinite;
+    }
   }
 
   &__empty-title {
-    margin: 0 0 var(--space-sm);
-    font-size: var(--text-xl);
-    font-weight: var(--font-semibold);
-    color: var(--color-text-primary);
+    margin: 0 0 var(--space-md);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    background: var(--color-primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   &__empty-text {
     margin: 0;
-    font-size: var(--text-sm);
-    color: var(--color-text-muted);
-    max-width: 300px;
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    max-width: 400px;
+    line-height: var(--leading-relaxed);
   }
 }
 
 .todo-skeleton {
   @include card;
-  padding: var(--space-lg);
+  padding: var(--space-xl);
 
   &__header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: var(--space-md);
+    margin-bottom: var(--space-lg);
   }
 
   &__badge {
-    width: 80px;
-    height: 24px;
+    width: 100px;
+    height: 28px;
     border-radius: var(--radius-full);
     @include shimmer;
   }
 
   &__date {
-    width: 60px;
-    height: 16px;
-    border-radius: var(--radius-sm);
+    width: 70px;
+    height: 20px;
+    border-radius: var(--radius-md);
     @include shimmer;
   }
 
   &__content {
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xl);
   }
 
   &__line {
-    height: 16px;
-    border-radius: var(--radius-sm);
+    height: 18px;
+    border-radius: var(--radius-md);
     @include shimmer;
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
 
     &--short {
-      width: 70%;
+      width: 60%;
     }
   }
 
   &__actions {
     display: flex;
-    gap: var(--space-sm);
+    gap: var(--space-md);
   }
 
   &__button {
-    width: 100px;
-    height: 32px;
-    border-radius: var(--radius-md);
+    width: 120px;
+    height: 36px;
+    border-radius: var(--radius-xl);
     @include shimmer;
   }
 }
