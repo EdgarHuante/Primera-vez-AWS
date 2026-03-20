@@ -31,6 +31,20 @@
     margin-bottom: var(--space-md);
   }
 
+  &__edit {
+    margin-bottom: var(--space-lg);
+    
+    .input {
+      width: 100%;
+      margin-bottom: var(--space-sm);
+    }
+  }
+
+  &__edit-actions {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
   &__content {
     margin: 0 0 var(--space-lg);
     font-size: var(--text-base);

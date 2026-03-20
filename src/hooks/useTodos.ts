@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { todoService } from '@services/todo.service';
-import type { CreateTodoInput, UpdateTodoStatusInput } from '@validation/todo.validation';
+import type { CreateTodoInput, UpdateTodoStatusInput, UpdateTodoContentInput } from '@validation/todo.validation';
 
 const QUERY_KEY = ['todos'] as const;
 
@@ -28,6 +28,17 @@ export function useUpdateTodoStatus() {
 
   return useMutation({
     mutationFn: (input: UpdateTodoStatusInput) => todoService.updateStatus(input),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEY });
+    },
+  });
+}
+
+export function useUpdateTodoContent() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (input: UpdateTodoContentInput) => todoService.updateContent(input),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY });
     },

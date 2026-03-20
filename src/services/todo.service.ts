@@ -1,13 +1,17 @@
 import { safeParse } from 'valibot';
-import { apiClient } from './api/client';
+import { generateClient } from 'aws-amplify/data';
 import {
   CreateTodoSchema,
   UpdateTodoStatusSchema,
+  UpdateTodoContentSchema,
   DeleteTodoSchema,
   type CreateTodoInput,
   type UpdateTodoStatusInput,
+  type UpdateTodoContentInput,
 } from '@validation/todo.validation';
 import type { TaskStatus } from '@domain/task';
+
+const apiClient = generateClient();
 
 export interface TaskResponse {
   id: string;
@@ -50,6 +54,23 @@ export const todoService = {
     const response = await apiClient.models.Todo.update({
       id: result.output.id,
       status: result.output.status,
+    });
+    if (!response.data) throw new Error('Failed to update todo');
+    return {
+      id: response.data.id,
+      content: response.data.content || '',
+      status: response.data.status || 'pendiente',
+    };
+  },
+
+  async updateContent(input: UpdateTodoContentInput): Promise<TaskResponse> {
+    const result = safeParse(UpdateTodoContentSchema, input);
+    if (!result.success) {
+      throw new Error(result.issues.map((i) => i.message).join(', '));
+    }
+    const response = await apiClient.models.Todo.update({
+      id: result.output.id,
+      content: result.output.content,
     });
     if (!response.data) throw new Error('Failed to update todo');
     return {

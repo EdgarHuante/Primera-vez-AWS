@@ -10,7 +10,7 @@ export interface AmplifyModels {
   Todo: {
     list: () => Promise<{ data: AmplifyTodo[] }>;
     create: (data: { content: string; status: TaskStatus }) => Promise<{ data: AmplifyTodo }>;
-    update: (data: { id: string; status: TaskStatus }) => Promise<{ data: AmplifyTodo }>;
+    update: (data: { id: string; status?: TaskStatus; content?: string }) => Promise<{ data: AmplifyTodo }>;
     delete: (data: { id: string }) => Promise<unknown>;
   };
 }

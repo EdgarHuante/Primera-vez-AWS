@@ -1,11 +1,5 @@
 export type TaskStatus = 'pendiente' | 'haciendo' | 'hecho';
 
-export interface Task {
-  id: string;
-  content: string;
-  status: TaskStatus;
-}
-
 export type TaskStatusTransition = {
   [K in TaskStatus]: TaskStatus | null;
 };

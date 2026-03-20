@@ -5,7 +5,7 @@ import { TodoList } from '@components/organisms/TodoList';
 import { Modal } from '@components/organisms/Modal';
 import { TodoForm } from '@components/molecules/TodoForm';
 import { useUIStore } from '@store/ui.store';
-import { useTodos, useCreateTodo, useUpdateTodoStatus, useDeleteTodo } from '@hooks/useTodos';
+import { useTodos, useCreateTodo, useUpdateTodoStatus, useUpdateTodoContent, useDeleteTodo } from '@hooks/useTodos';
 import { useToast } from '@hooks/useToast';
 import { useErrorHandler } from '@hooks/useErrorHandler';
 import type { TaskStatus } from '@domain/task';
@@ -31,6 +31,7 @@ function AppContent() {
   const { data: todos = [], isLoading } = useTodos();
   const createTodo = useCreateTodo();
   const updateTodoStatus = useUpdateTodoStatus();
+  const updateTodoContent = useUpdateTodoContent();
   const deleteTodo = useDeleteTodo();
 
   const counts: Record<FilterStatus, number> = {
@@ -67,6 +68,16 @@ function AppContent() {
     );
   };
 
+  const handleUpdateContent = (id: string, content: string) => {
+    updateTodoContent.mutate(
+      { id, content },
+      {
+        onSuccess: () => toast.success('Tarea actualizada correctamente'),
+        onError: (error) => handleError(error, { operation: 'actualizar tarea' }),
+      }
+    );
+  };
+
   const handleDelete = (id: string) => {
     if (window.confirm('¿Estás seguro de eliminar esta tarea?')) {
       deleteTodo.mutate(id, {
@@ -88,6 +99,7 @@ function AppContent() {
         <TodoList
           todos={filteredTodos}
           onStatusChange={handleStatusChange}
+          onUpdateContent={handleUpdateContent}
           onDelete={handleDelete}
           isLoading={isLoading}
         />

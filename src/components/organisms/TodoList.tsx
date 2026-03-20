@@ -7,6 +7,7 @@ import './TodoList.scss';
 interface TodoListProps {
   todos: TaskResponse[];
   onStatusChange: (id: string, status: TaskStatus) => void;
+  onUpdateContent: (id: string, content: string) => void;
   onDelete: (id: string) => void;
   isLoading?: boolean;
 }
@@ -31,6 +32,7 @@ const SkeletonItem = () => (
 export const TodoList = ({
   todos,
   onStatusChange,
+  onUpdateContent,
   onDelete,
   isLoading,
 }: TodoListProps) => {
@@ -65,6 +67,7 @@ export const TodoList = ({
           key={todo.id}
           todo={todo}
           onStatusChange={onStatusChange}
+          onUpdateContent={onUpdateContent}
           onDelete={onDelete}
           index={index}
         />
