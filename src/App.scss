@@ -1,0 +1,44 @@
+@use './styles/global';
+@use './styles/mixins';
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__main {
+    flex: 1;
+    max-width: var(--container-max);
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--space-xl) var(--container-padding);
+  }
+
+  &__footer {
+    margin-top: auto;
+    padding: var(--space-lg);
+    background-color: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+  }
+
+  &__footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  &__footer-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-primary);
+    font-weight: var(--font-medium);
+  }
+
+  &__footer-divider {
+    color: var(--color-border);
+  }
+}
