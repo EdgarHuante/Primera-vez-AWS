@@ -1,0 +1,22 @@
+.toast-container {
+  position: fixed;
+  top: var(--space-xl);
+  right: var(--space-xl);
+  z-index: var(--z-toast);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  max-width: 420px;
+  width: 100%;
+  pointer-events: none;
+
+  > * {
+    pointer-events: auto;
+  }
+
+  @media (max-width: 640px) {
+    left: var(--space-md);
+    right: var(--space-md);
+    max-width: none;
+  }
+}
